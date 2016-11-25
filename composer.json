@@ -1,0 +1,27 @@
+{
+	"name" : "cscfa_tool_division/phpunit_docker_bridge",
+	"type" : "library",
+	"version" : "1.0.0",
+	"keywords" : [
+		"docker",
+		"phpunit",
+		"cscfa",
+		"tool",
+		"division"
+	],
+	"homepage" : "http://cscfa.fr",
+	"authors" : [{
+			"name" : "Matthieu VALLANCE",
+			"email" : "matthieu.vallance@cscfa.fr"
+		}
+	],
+	"autoload" : {
+		"psr-4" : {
+			"CSDT\\PHPUnit\\DockerBridgeBundle\\" : "src/CSDT/PHPUnit/DockerBridgeBundle/"
+		}
+	},
+	"require" : {
+		"cscfa_tool_division/collections" : "dev-master",
+		"cscfa_tool_division/docker_util" : ">=1.1"
+	}
+}
