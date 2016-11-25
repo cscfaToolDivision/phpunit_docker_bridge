@@ -1,7 +1,7 @@
 {
 	"name" : "cscfa_tool_division/phpunit_docker_bridge",
 	"type" : "library",
-	"version" : "1.0.0",
+	"version" : "1.0.0-WTC",
 	"keywords" : [
 		"docker",
 		"phpunit",
@@ -21,6 +21,7 @@
 		}
 	},
 	"require" : {
+		"symfony/framework-bundle" : ">=2.5"
 		"cscfa_tool_division/collections" : "dev-master",
 		"cscfa_tool_division/docker_util" : ">=1.1"
 	}

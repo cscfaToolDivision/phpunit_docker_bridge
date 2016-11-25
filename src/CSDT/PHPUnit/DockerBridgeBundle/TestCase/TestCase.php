@@ -5,6 +5,7 @@ use CSDT\PHPUnit\DockerBridgeBundle\TestThread\TestThread;
 use CSDT\DockerUtilBundle\Container\Container;
 use CSDT\PHPUnit\DockerBridgeBundle\TestThread\TestInfo;
 use CSDT\CollectionsBundle\Collections\MapCollection;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Test case
@@ -15,7 +16,7 @@ use CSDT\CollectionsBundle\Collections\MapCollection;
  *
  * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
  */
-abstract class TestCase extends \PHPUnit_Framework_TestCase
+abstract class TestCase extends WebTestCase
 {
 
     /**
