@@ -5,7 +5,6 @@ use CSDT\PHPUnit\DockerBridgeBundle\TestThread\TestThread;
 use CSDT\DockerUtilBundle\Container\Container;
 use CSDT\PHPUnit\DockerBridgeBundle\TestThread\TestInfo;
 use CSDT\CollectionsBundle\Collections\MapCollection;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Test case
@@ -16,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  *
  * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
  */
-abstract class TestCase extends WebTestCase
+abstract class TestCase extends \PHPUnit_Framework_TestCase
 {
 
     /**
@@ -105,9 +104,9 @@ abstract class TestCase extends WebTestCase
      *
      * @see PHPUnit_Framework_TestCase::assertPreConditions()
      */
-    protected function assertPreConditions()
+    protected function setUp()
     {
-        parent::assertPreConditions();
+        parent::setUp();
 
         $testThread = $this->getCurrentTestThread();
         $test = $testThread->getTest($this->getName(false));
