@@ -149,8 +149,10 @@ abstract class TestCase extends WebTestCase
         }
 
         if ($test->getDependency()->isEmpty()) {
-            $this->removeContainer(self::$container->get(get_class($this)));
-            self::$container->remove(get_class($this));
+            if (self::$container->has(get_class($this))) {
+                $this->removeContainer(self::$container->get(get_class($this)));
+                self::$container->remove(get_class($this));
+            }
         }
     }
 
@@ -173,7 +175,9 @@ abstract class TestCase extends WebTestCase
             parent::onNotSuccessfulTest($exception);
         }
 
-        $this->removeContainer(self::$container->get(get_class($this)));
+        if (self::$container->has(get_class($this))) {
+            $this->removeContainer(self::$container->get(get_class($this)));
+        }
         self::$container->remove(get_class($this));
 
         parent::onNotSuccessfulTest($exception);
