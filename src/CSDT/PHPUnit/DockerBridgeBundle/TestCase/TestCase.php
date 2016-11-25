@@ -148,8 +148,10 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
         }
 
         if ($test->getDependency()->isEmpty()) {
-            $this->removeContainer(self::$container->get(get_class($this)));
-            self::$container->remove(get_class($this));
+            if (self::$container->has(get_class($this))) {
+                $this->removeContainer(self::$container->get(get_class($this)));
+                self::$container->remove(get_class($this));
+            }
         }
     }
 
@@ -172,7 +174,9 @@ abstract class TestCase extends \PHPUnit_Framework_TestCase
             parent::onNotSuccessfulTest($exception);
         }
 
-        $this->removeContainer(self::$container->get(get_class($this)));
+        if (self::$container->has(get_class($this))) {
+            $this->removeContainer(self::$container->get(get_class($this)));
+        }
         self::$container->remove(get_class($this));
 
         parent::onNotSuccessfulTest($exception);
