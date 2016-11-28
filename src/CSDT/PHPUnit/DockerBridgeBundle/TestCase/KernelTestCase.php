@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase as BaseTestCase;
  *
  * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
  */
-class KernelTestCase extends BaseTestCase
+abstract class KernelTestCase extends BaseTestCase
 {
     use TestCaseTrait;
 }
