@@ -113,9 +113,9 @@ trait TestCaseTrait
      *
      * @see PHPUnit_Framework_TestCase::assertPreConditions()
      */
-    protected function assertPreConditions()
+    protected function setUp()
     {
-        parent::assertPreConditions();
+        parent::setUp();
 
         $testThread = $this->getCurrentTestThread();
         $test = $testThread->getTest($this->getName(false));
