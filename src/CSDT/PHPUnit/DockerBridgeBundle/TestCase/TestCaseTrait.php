@@ -44,6 +44,15 @@ trait TestCaseTrait
      * @var \Exception
      */
     private $buildError = null;
+    
+    /**
+     * Last test
+     * 
+     * The last runned test
+     * 
+     * @var string
+     */
+    private static $lastTest = null;
 
     /**
      * Build container
@@ -126,8 +135,13 @@ trait TestCaseTrait
             return;
         }
 
+        $isDataRecursion = (
+            !$test->getAnnotation("dataProvider")->isEmpty() && 
+            self::$lastTest == $test->getName()
+        );
+        
         try {
-            if ($test->getDependence()->isEmpty()) {
+            if ($test->getDependence()->isEmpty() && !$isDataRecursion) {
                 if (self::$container->has(get_class($this))) {
                     $this->removeContainer(self::$container->get(get_class($this)));
                     self::$container->remove(get_class($this));
@@ -139,6 +153,8 @@ trait TestCaseTrait
         } catch (\Exception $exception) {
             $this->buildError = $exception;
         }
+        
+        self::$lastTest = $test->getName();
     }
 
     /**
