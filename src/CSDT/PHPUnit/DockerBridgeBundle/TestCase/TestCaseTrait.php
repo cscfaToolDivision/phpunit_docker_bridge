@@ -152,6 +152,7 @@ trait TestCaseTrait
             }
         } catch (\Exception $exception) {
             $this->buildError = $exception;
+            throw $exception;
         }
         
         self::$lastTest = $test->getName();
