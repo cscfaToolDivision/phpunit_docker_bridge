@@ -2,7 +2,7 @@
 
 namespace CSDT\PHPUnit\DockerBridgeBundle\TestCase;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase as BaseTestCase;
 
 /**
  * Kernel test case
@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
  *
  * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
  */
-class KernelTestCase extends KernelTestCase
+class KernelTestCase extends BaseTestCase
 {
     use TestCaseTrait;
 }

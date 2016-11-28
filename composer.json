@@ -1,7 +1,7 @@
 {
 	"name" : "cscfa_tool_division/phpunit_docker_bridge",
 	"type" : "library",
-	"version" : "1.1.0-WTC",
+	"version" : "1.1.1-WTC",
 	"keywords" : [
 		"docker",
 		"phpunit",
