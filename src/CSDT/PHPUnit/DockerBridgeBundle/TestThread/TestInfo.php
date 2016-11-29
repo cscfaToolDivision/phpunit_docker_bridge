@@ -126,7 +126,10 @@ class TestInfo
     public function __construct($methodName, array $annotations = array())
     {
         $this->methodName = $methodName;
-        $this->parseAnnotationArray($annotations);
+        
+        if (is_array($annotations)) {
+            $this->parseAnnotationArray($annotations);
+        }
 
         $this->dependence = new ValueCollection();
         $this->dependOf = new ValueCollection();
@@ -148,6 +151,10 @@ class TestInfo
         $map = new MapCollection();
 
         foreach ($annotations as $name => $items) {
+            if (!is_array($items)) {
+                continue;
+            }
+            
             $set = new ValueCollection();
             $set->addAll($items);
             $map->set($name, $set);
