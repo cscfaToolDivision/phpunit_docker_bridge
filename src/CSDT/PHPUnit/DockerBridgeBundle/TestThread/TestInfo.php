@@ -1,4 +1,19 @@
 <?php
+/**
+ * This file is part of the PHPUnit Docker Bridge project.
+ *
+ * As each files provides by the CSCFA, this file is licensed
+ * under the MIT license.
+ *
+ * PHP version 5.6
+ *
+ * @category TestThread
+ * @package  PHPUnitDockerBridge
+ * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
+ * @license  MIT <https://opensource.org/licenses/MIT>
+ * @link     http://cscfa.fr
+ */
+
 namespace CSDT\PHPUnit\DockerBridgeBundle\TestThread;
 
 use CSDT\CollectionsBundle\Collections\MapCollection;
@@ -9,7 +24,11 @@ use CSDT\CollectionsBundle\Collections\ValueCollection;
  *
  * This class is used to store a test with it informations
  *
- * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
+ * @category TestThread
+ * @package  PHPUnitDockerBridge
+ * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
+ * @license  MIT <https://opensource.org/licenses/MIT>
+ * @link     http://cscfa.fr
  */
 class TestInfo
 {
@@ -126,7 +145,7 @@ class TestInfo
     public function __construct($methodName, array $annotations = array())
     {
         $this->methodName = $methodName;
-        
+
         if (is_array($annotations)) {
             $this->parseAnnotationArray($annotations);
         }
@@ -135,32 +154,6 @@ class TestInfo
         $this->dependOf = new ValueCollection();
 
         $this->testStatus = self::IN_QUEUE;
-    }
-
-    /**
-     * Parse annotation array
-     *
-     * Parse the test method annotations
-     *
-     * @param array $annotations The method annotations
-     *
-     * @return void
-     */
-    private function parseAnnotationArray(array $annotations)
-    {
-        $map = new MapCollection();
-
-        foreach ($annotations as $name => $items) {
-            if (!is_array($items)) {
-                continue;
-            }
-            
-            $set = new ValueCollection();
-            $set->addAll($items);
-            $map->set($name, $set);
-        }
-
-        $this->annotations = $map;
     }
 
     /**
@@ -269,5 +262,31 @@ class TestInfo
     public function getStatus()
     {
         return $this->testStatus;
+    }
+
+    /**
+     * Parse annotation array
+     *
+     * Parse the test method annotations
+     *
+     * @param array $annotations The method annotations
+     *
+     * @return void
+     */
+    private function parseAnnotationArray(array $annotations)
+    {
+        $map = new MapCollection();
+
+        foreach ($annotations as $name => $items) {
+            if (!is_array($items)) {
+                continue;
+            }
+
+            $set = new ValueCollection();
+            $set->addAll($items);
+            $map->set($name, $set);
+        }
+
+        $this->annotations = $map;
     }
 }

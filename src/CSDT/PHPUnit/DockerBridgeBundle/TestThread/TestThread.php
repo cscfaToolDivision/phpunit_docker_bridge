@@ -1,4 +1,19 @@
 <?php
+/**
+ * This file is part of the PHPUnit Docker Bridge project.
+ *
+ * As each files provides by the CSCFA, this file is licensed
+ * under the MIT license.
+ *
+ * PHP version 5.6
+ *
+ * @category TestThread
+ * @package  PHPUnitDockerBridge
+ * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
+ * @license  MIT <https://opensource.org/licenses/MIT>
+ * @link     http://cscfa.fr
+ */
+
 namespace CSDT\PHPUnit\DockerBridgeBundle\TestThread;
 
 use CSDT\CollectionsBundle\Collections\MapCollection;
@@ -8,7 +23,11 @@ use CSDT\CollectionsBundle\Collections\MapCollection;
  *
  * This class is used to store a test case thread.
  *
- * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
+ * @category TestThread
+ * @package  PHPUnitDockerBridge
+ * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
+ * @license  MIT <https://opensource.org/licenses/MIT>
+ * @link     http://cscfa.fr
  */
 class TestThread
 {
@@ -79,6 +98,20 @@ class TestThread
     }
 
     /**
+     * Get test
+     *
+     * Return the thread tests if exists, or null
+     *
+     * @param string $name The name of the test to get
+     *
+     * @return TestInfo|NULL
+     */
+    public function getTest($name)
+    {
+        return $this->tests->get($name);
+    }
+
+    /**
      * Add test dependency
      *
      * This method inject the dependency informations
@@ -125,17 +158,5 @@ class TestThread
         }
 
         return $dependOf;
-    }
-
-    /**
-     * Get test
-     *
-     * Return the thread tests if exists, or null
-     *
-     * @return TestInfo|NULL
-     */
-    public function getTest($name)
-    {
-        return $this->tests->get($name);
     }
 }
