@@ -66,11 +66,11 @@ class TestThreadTest extends TestCase
         return array(
             array(
                 'methodName',
-                array('annotation'=>array('annotationValue'))
+                array('annotation' => array('annotationValue')),
             ),
             array(
                 'methodName',
-                null
+                null,
             ),
         );
     }
@@ -126,8 +126,8 @@ class TestThreadTest extends TestCase
 
         $this->assertTestInfo(
             $test,
-            'The \'getTest\' method MUST return the requested TestInfo '.
-            'according with the test name if it\'s stored');
+            'The \'getTest\' method MUST return the requested TestInfo '.'according with the test name if it\'s stored'
+        );
 
         $this->assertTestInfoContent(
             $test,
@@ -136,8 +136,7 @@ class TestThreadTest extends TestCase
 
         $this->assertNull(
             $instance->getTest('fakeTest'),
-            'The \'getTest\' method MUST return NULL if the requested test '.
-            'is not stored'
+            'The \'getTest\' method MUST return NULL if the requested test '.'is not stored'
         );
     }
 
@@ -170,9 +169,7 @@ class TestThreadTest extends TestCase
         $dependence = $instance->getTest($dependenceTest[0]);
         $child = $instance->getTest($childTest[0]);
 
-        $message = 'The \'resolveDependence\' method MUST inject the '.
-            'dependent test into their parents, and their parents into '.
-            'their dependences for each stored tests';
+        $message = 'The \'resolveDependence\' method MUST inject the '.'dependent test into their parents, and their parents into '.'their dependences for each stored tests';
 
         $this->assertEquals(
             1,
@@ -219,8 +216,7 @@ class TestThreadTest extends TestCase
     ) {
         $methodArray = $collection->toArray();
 
-        $message = 'The \'addMethod\' method MUST register a new TestInfo '.
-            'into the \'tests\' MapCollection, referenced by test name';
+        $message = 'The \'addMethod\' method MUST register a new TestInfo '.'into the \'tests\' MapCollection, referenced by test name';
 
         $this->assertEquals(1, count($methodArray), $message);
 
@@ -261,15 +257,13 @@ class TestThreadTest extends TestCase
 
                 $this->assertFalse(
                     $annotation->isEmpty(),
-                    'The created TestInfo SHOULD contain the given '.
-                    'annotations as annotations'
+                    'The created TestInfo SHOULD contain the given '.'annotations as annotations'
                 );
 
                 foreach ($annotationContent as $content) {
                     $this->assertTrue(
                         $annotation->contain($content),
-                        'The created TestInfo SHOULD contain the given '.
-                        'annotations as annotations'
+                        'The created TestInfo SHOULD contain the given '.'annotations as annotations'
                     );
                 }
             }
@@ -309,15 +303,14 @@ class TestThreadTest extends TestCase
      */
     private function assertTestsConstructor(TestThread $instance)
     {
-        $tests = $this->getPropertyValue($instance, 'tests');
+        $tests = $this->getTestsProperty($instance);
         $this->assertMapCollection(
             $tests,
             'The \'tests\' property MUST be initialized as a MapCollection'
         );
         $this->assertMapCollectionEmpty(
             $tests,
-            'The \'tests\' property MUST be initialized as an empty '.
-            'MapCollection'
+            'The \'tests\' property MUST be initialized as an empty '.'MapCollection'
         );
     }
 
@@ -370,7 +363,7 @@ class TestThreadTest extends TestCase
     {
         $this->assertEquals(
             $expected,
-            $this->getPropertyValue($instance, 'testClass'),
+            $this->getClassNameProperty($instance),
             $message
         );
     }
@@ -400,7 +393,7 @@ class TestThreadTest extends TestCase
      */
     private function getClassNameProperty(TestThread $instance)
     {
-        return $this->getPropertyValue($instance, 'tests');
+        return $this->getPropertyValue($instance, 'testClass');
     }
 
     /**
