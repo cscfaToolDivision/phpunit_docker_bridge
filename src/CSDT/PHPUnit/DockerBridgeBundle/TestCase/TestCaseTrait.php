@@ -1,4 +1,18 @@
 <?php
+/**
+ * This file is part of the PHPUnit Docker Bridge project.
+ *
+ * As each files provides by the CSCFA, this file is licensed
+ * under the MIT license.
+ *
+ * PHP version 5.6
+ *
+ * @category TestCase
+ * @package  PHPUnitDockerBridge
+ * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
+ * @license  MIT <https://opensource.org/licenses/MIT>
+ * @link     http://cscfa.fr
+ */
 
 namespace CSDT\PHPUnit\DockerBridgeBundle\TestCase;
 
@@ -13,7 +27,11 @@ use CSDT\CollectionsBundle\Collections\MapCollection;
  * This class is used to provide abstraction logic to the
  * container building tests
  *
- * @author Matthieu Vallance <matthieu.vallance@cscfa.fr>
+ * @category TestCase
+ * @package  PHPUnitDockerBridge
+ * @author   matthieu vallance <matthieu.vallance@cscfa.fr>
+ * @license  MIT <https://opensource.org/licenses/MIT>
+ * @link     http://cscfa.fr
  */
 trait TestCaseTrait
 {
@@ -35,21 +53,21 @@ trait TestCaseTrait
      * @var MapCollection <Container>
      */
     private static $container = null;
-    
+
     /**
      * BuildError
-     * 
+     *
      * The current class building error
-     * 
+     *
      * @var \Exception
      */
     private $buildError = null;
-    
+
     /**
      * Last test
-     * 
+     *
      * The last runned test
-     * 
+     *
      * @var string
      */
     private static $lastTest = null;
@@ -136,10 +154,10 @@ trait TestCaseTrait
         }
 
         $isDataRecursion = (
-            !$test->getAnnotation("dataProvider")->isEmpty() && 
+            !$test->getAnnotation("dataProvider")->isEmpty() &&
             self::$lastTest == $test->getName()
         );
-        
+
         try {
             if ($test->getDependence()->isEmpty() && !$isDataRecursion) {
                 if (self::$container->has(get_class($this))) {
@@ -147,14 +165,14 @@ trait TestCaseTrait
                     self::$container->remove(get_class($this));
                 }
                 self::$container->set(get_class($this), $this->buildContainer());
-            } else if (!self::$container->has(get_class($this))) {
+            } elseif (!self::$container->has(get_class($this))) {
                 self::$container->set(get_class($this), $this->buildContainer());
             }
         } catch (\Exception $exception) {
             $this->buildError = $exception;
             throw $exception;
         }
-        
+
         self::$lastTest = $test->getName();
     }
 
@@ -216,7 +234,7 @@ trait TestCaseTrait
         } catch (\Exception $e) {
             parent::onNotSuccessfulTest($exception);
         }
-        
+
         if (!is_null($this->buildError)) {
             $exception = $this->buildError;
         }
